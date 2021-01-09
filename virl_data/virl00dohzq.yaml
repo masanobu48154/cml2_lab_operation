@@ -1,0 +1,4843 @@
+lab:
+  description: ''
+  notes: ''
+  timestamp: 1607076775.8758893
+  title: Lab at Fri 10:12 AM
+  version: 0.0.3
+nodes:
+  - id: n0
+    label: iosvl2-0
+    node_definition: iosvl2
+    x: -200
+    y: -50
+    configuration: |-
+      !
+      ! Last configuration change at 01:29:58 UTC Wed Sep 18 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname CORE
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.255.255 255.255.255.255
+      !
+      interface Port-channel1
+       no switchport
+       ip address 10.1.255.1 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface Port-channel2
+       no switchport
+       ip address 10.1.255.5 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface Port-channel3
+       no switchport
+       ip address 10.1.255.13 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ####TO_DISTRIBUTION_EAST_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ####TO_DISTRIBUTION_WEST_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       description ###TO_DISTRIBUTION_SOUTH_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 3 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       description ####TO_DISTRIBUTION_EAST_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/2
+       description ####TO_DISTRIBUTION_WEST_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/3
+       description ###TO_DISTRIBUTION_SOUTH_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 3 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      router ospf 100
+       router-id 10.1.255.255
+       passive-interface default
+       no passive-interface Port-channel1
+       no passive-interface Port-channel2
+       no passive-interface Port-channel3
+       network 10.1.255.0 0.0.0.255 area 0
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+      - id: i7
+        slot: 6
+        label: GigabitEthernet1/2
+        type: physical
+      - id: i8
+        slot: 7
+        label: GigabitEthernet1/3
+        type: physical
+  - id: n1
+    label: iosvl2-1
+    node_definition: iosvl2
+    x: -100
+    y: -150
+    configuration: |-
+      !
+      ! Last configuration change at 01:30:06 UTC Wed Sep 18 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname DIST_E
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      !
+      vlan 100-101
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.15.255 255.255.255.255
+      !
+      interface Port-channel1
+       no switchport
+       ip address 10.1.255.2 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface Port-channel2
+       description ###TO_ACCESS_EAST###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ###TO_CORE_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_ACCESS_EAST_MEMBER###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       description ###TO_CORE_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/2
+       description ###TO_ACCESS_EAST_MEMBER###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface Vlan100
+       description ###EAST_DATA1###
+       ip address 10.1.0.1 255.255.255.0
+      !
+      interface Vlan101
+       description ###EAST_VOICE1###
+       ip address 10.1.1.1 255.255.255.0
+      !
+      router ospf 100
+       router-id 10.1.15.255
+       area 1 stub no-summary
+       passive-interface default
+       no passive-interface Port-channel1
+       network 10.1.0.0 0.0.15.255 area 1
+       network 10.1.255.0 0.0.0.255 area 0
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+      - id: i7
+        slot: 6
+        label: GigabitEthernet1/2
+        type: physical
+  - id: n2
+    label: iosvl2-2
+    node_definition: iosvl2
+    x: 0
+    y: -50
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:29 UTC Sat Jun 1 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname ACC_E
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      no ip routing
+      !
+      !
+      !
+      no ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      vlan internal allocation policy ascending
+      !
+      vlan 100-101
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Port-channel1
+       description ###TO_DISTRIBUTION_EAST###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       switchport access vlan 100
+       switchport mode access
+       switchport voice vlan 101
+       media-type rj45
+       negotiation auto
+       spanning-tree portfast edge
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_DISTRIBUTION_EAST_MEMBER###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/2
+       description ###TO_DISTRIBUTION_EAST_MEMBER###
+       switchport trunk allowed vlan 100,101
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface Vlan100
+       ip address 10.1.0.254 255.255.255.0
+      !
+      ip default-gateway 10.1.0.1
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+      - id: i7
+        slot: 6
+        label: GigabitEthernet1/2
+        type: physical
+  - id: n3
+    label: iosv-0
+    node_definition: iosv
+    x: 50
+    y: -150
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:26 UTC Sat Jun 1 2019
+      !
+      version 15.6
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname NODE_E
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.24 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 10.1.0.100 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 10.1.0.1
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n4
+    label: iosvl2-3
+    node_definition: iosvl2
+    x: -300
+    y: -150
+    configuration: |-
+      !
+      ! Last configuration change at 01:29:53 UTC Wed Sep 18 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname DIST_W
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      !
+      vlan 116-117
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.31.255 255.255.255.255
+      !
+      interface Port-channel1
+       no switchport
+       ip address 10.1.255.6 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface Port-channel2
+       description ###TO_ACCESS_WEST###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ###TO_ACCESS_WEST_MEMBER###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_CORE_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       description ###TO_ACCESS_WEST_MEMBER###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 2 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/2
+       description ###TO_CORE_MEMBER###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface Vlan116
+       description ###WEST_DATA1###
+       ip address 10.1.16.1 255.255.255.0
+      !
+      interface Vlan117
+       description ###WEST_VOICE1###
+       ip address 10.1.17.1 255.255.255.0
+      !
+      router ospf 100
+       router-id 10.1.31.255
+       area 2 stub no-summary
+       passive-interface default
+       no passive-interface Port-channel1
+       network 10.1.16.0 0.0.15.255 area 2
+       network 10.1.255.0 0.0.0.255 area 0
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+      - id: i7
+        slot: 6
+        label: GigabitEthernet1/2
+        type: physical
+  - id: n5
+    label: iosvl2-4
+    node_definition: iosvl2
+    x: -400
+    y: -50
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:47 UTC Sat Jun 1 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname ACC_W
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      no ip routing
+      !
+      !
+      !
+      no ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      vlan internal allocation policy ascending
+      !
+      vlan 116-117
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Port-channel1
+       description ###TO_DISTRIBUTION_WEST###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ###TO_DISTRIBUTION_WEST_MEMBER###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       switchport access vlan 116
+       switchport mode access
+       switchport voice vlan 117
+       media-type rj45
+       negotiation auto
+       spanning-tree portfast edge
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       description ###TO_DISTRIBUTION_WEST_MEMBER###
+       switchport trunk allowed vlan 116,117
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface Vlan116
+       ip address 10.1.16.254 255.255.255.0
+      !
+      ip default-gateway 10.1.16.1
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+  - id: n6
+    label: iosv-1
+    node_definition: iosv
+    x: -500
+    y: -150
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:24 UTC Sat Jun 1 2019
+      !
+      version 15.6
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname NODE_W
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.27 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 10.1.16.100 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+        ! inserted by converter
+        no shutdown
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 10.1.16.1
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n7
+    label: iosvl2-5
+    node_definition: iosvl2
+    x: -200
+    y: 50
+    configuration: |+
+      !
+      ! Last configuration change at 01:29:10 UTC Wed Sep 18 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname DIST_S
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.128.255 255.255.255.255
+      !
+      interface Port-channel1
+       no switchport
+       ip address 10.1.255.14 255.255.255.252
+       ip ospf network point-to-point
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       media-type rj45
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       description ###TO_CORE###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/0
+       description ####TO_L2WAN_AGG###
+       no switchport
+       ip address 10.1.128.1 255.255.255.252
+       ip ospf network point-to-point
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/1
+       description ####TO_VPN_AGG###
+       no switchport
+       ip address 10.1.128.5 255.255.255.252
+       ip ospf network point-to-point
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/2
+       description ####TO_INET_EDGE###
+       no switchport
+       ip address 10.1.128.9 255.255.255.252
+       ip ospf network point-to-point
+       negotiation auto
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet1/3
+       description ###TO_CORE###
+       no switchport
+       no ip address
+       negotiation auto
+       channel-group 1 mode on
+        ! inserted by converter
+        no shutdown
+      !
+      router ospf 100
+       router-id 10.1.128.255
+       passive-interface default
+       no passive-interface GigabitEthernet1/0
+       no passive-interface GigabitEthernet1/1
+       no passive-interface GigabitEthernet1/2
+       no passive-interface Port-channel1
+       network 10.1.128.0 0.0.15.255 area 5
+       network 10.1.255.14 0.0.0.0 area 0
+      !
+      ip forward-protocol nd
+      !
+      no ip http server
+      !
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet1/0
+        type: physical
+      - id: i6
+        slot: 5
+        label: GigabitEthernet1/1
+        type: physical
+      - id: i7
+        slot: 6
+        label: GigabitEthernet1/2
+        type: physical
+      - id: i8
+        slot: 7
+        label: GigabitEthernet1/3
+        type: physical
+  - id: n8
+    label: iosv-2
+    node_definition: iosv
+    x: -400
+    y: 100
+    configuration: |-
+      !
+      ! Last configuration change at 03:05:59 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname L2WAN_AGG
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      class-map match-any TRANSACTIONAL_DATA
+       match dscp af21
+       match dscp af22
+       match dscp af23
+      class-map match-any OPS_ADMIN_MNGM
+       match dscp cs2
+      class-map match-any MULTIMEDIA_STREAMING
+       match dscp af31
+       match dscp af32
+       match dscp af33
+      class-map match-all MARKING_IN#TUNNELED-NBAR
+       match access-group name CAPWAP
+      class-map match-all MARKING_IN#REAL-TIME_INTERACTIVE
+       match protocol attribute traffic-class real-time-interactive
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#MULTIMEDIA_STREAMING
+       match protocol attribute traffic-class multimedia-streaming
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#OPS_ADMIN_MNGM
+       match protocol attribute traffic-class ops-admin-mgmt
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#TRANSACTIONAL_DATA
+       match protocol attribute traffic-class transactional-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-any REAL-TIME_INTERACTIVE
+       match dscp cs4
+      class-map match-any NETWORK_CONTROL
+       match dscp cs6
+       match protocol icmp potentially
+      class-map match-all RS2_10.2.16.0
+       match access-group name RS2_10.2.16.0
+      class-map match-any MULTIMEDIA_CONFERENCE
+       match dscp af41
+       match dscp af42
+       match dscp af43
+      class-map match-any BROADCAST_VIDEO
+       match dscp cs5
+      class-map match-any VOICE
+       match dscp ef
+      class-map match-any SCAVENGER
+       match dscp cs1
+      class-map match-any SIGNALING
+       match dscp cs3
+      class-map match-any BULK_DATA
+       match dscp af11
+       match dscp af12
+       match dscp af13
+      class-map match-all MARKING_IN#MULTIMEDIA_CONFERENCE
+       match protocol attribute traffic-class multimedia-conferencing
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#NETWORK_CONTROL
+       match protocol attribute traffic-class network-control
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SIGNALING
+       match protocol attribute traffic-class signaling
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BULK_DATA
+       match protocol attribute traffic-class bulk-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SCAVENGER
+       match protocol attribute business-relevance business-irrelevant
+      class-map match-any RS1_10.2.0.0
+       match access-group name RS1_10.2.0.0
+      class-map match-all MARKING_IN#VOICE
+       match protocol attribute traffic-class voip-telephony
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BROADCAST_VIDEO
+       match protocol attribute traffic-class broadcast-video
+       match protocol attribute business-relevance business-relevant
+      !
+      policy-map RS1_10.2.0.0
+       class VOICE
+        police rate percent 10
+        priority
+       class BROADCAST_VIDEO
+        police rate percent 10
+        priority
+       class REAL-TIME_INTERACTIVE
+        police rate percent 13
+        priority
+       class NETWORK_CONTROL
+        bandwidth remaining percent 4
+       class SIGNALING
+        bandwidth remaining percent 3
+       class OPS_ADMIN_MNGM
+        bandwidth remaining percent 3
+       class MULTIMEDIA_CONFERENCE
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class MULTIMEDIA_STREAMING
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class TRANSACTIONAL_DATA
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class BULK_DATA
+        bandwidth remaining percent 6
+        fair-queue
+        random-detect dscp-based
+       class SCAVENGER
+        bandwidth remaining percent 1
+       class class-default
+        bandwidth remaining percent 38
+        fair-queue
+        random-detect dscp-based
+      policy-map RS2_10.2.16.0
+       class VOICE
+        police rate percent 10
+        priority
+       class BROADCAST_VIDEO
+        police rate percent 10
+        priority
+       class REAL-TIME_INTERACTIVE
+        police rate percent 13
+        priority
+       class NETWORK_CONTROL
+        bandwidth remaining percent 4
+       class SIGNALING
+        bandwidth remaining percent 3
+       class OPS_ADMIN_MNGM
+        bandwidth remaining percent 3
+       class MULTIMEDIA_CONFERENCE
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class MULTIMEDIA_STREAMING
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class TRANSACTIONAL_DATA
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class BULK_DATA
+        bandwidth remaining percent 6
+        fair-queue
+        random-detect dscp-based
+       class SCAVENGER
+        bandwidth remaining percent 1
+       class class-default
+        bandwidth remaining percent 38
+        fair-queue
+        random-detect dscp-based
+      policy-map PER_SITE_SHAPERS
+       class NETWORK_CONTROL
+        bandwidth percent 3
+       class RS1_10.2.0.0
+        shape average 128000
+         service-policy RS1_10.2.0.0
+       class RS2_10.2.16.0
+        shape average 128000
+         service-policy RS2_10.2.16.0
+      policy-map QUEUE_OUT
+       class class-default
+        shape average 1000000
+         service-policy PER_SITE_SHAPERS
+      policy-map MARKING_IN
+       class MARKING_IN#VOICE
+        set dscp ef
+       class MARKING_IN#BROADCAST_VIDEO
+        set dscp cs5
+       class MARKING_IN#REAL-TIME_INTERACTIVE
+        set dscp cs4
+       class MARKING_IN#MULTIMEDIA_CONFERENCE
+        set dscp af41
+       class MARKING_IN#MULTIMEDIA_STREAMING
+        set dscp af31
+       class MARKING_IN#NETWORK_CONTROL
+        set dscp cs6
+       class MARKING_IN#SIGNALING
+        set dscp cs3
+       class MARKING_IN#OPS_ADMIN_MNGM
+        set dscp cs2
+       class MARKING_IN#TRANSACTIONAL_DATA
+        set dscp af21
+       class MARKING_IN#BULK_DATA
+        set dscp af11
+       class MARKING_IN#TUNNELED-NBAR
+       class MARKING_IN#SCAVENGER
+        set dscp cs1
+       class class-default
+        set dscp default
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.128.254 255.255.255.255
+      !
+      interface Loopback1
+       ip address 10.1.128.253 255.255.255.255
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.55 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_L2WAN###
+       ip address 10.1.129.1 255.255.255.0
+       ip ospf network point-to-multipoint non-broadcast
+       ip ospf hello-interval 1
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       service-policy output QUEUE_OUT
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_DISTRIBUTION_SOUTH###
+       ip address 10.1.128.2 255.255.255.252
+       ip ospf network point-to-point
+       duplex auto
+       speed auto
+       media-type rj45
+       service-policy input MARKING_IN
+        ! inserted by converter
+        no shutdown
+      !
+      router ospf 300
+       router-id 10.1.128.253
+       passive-interface default
+       no passive-interface GigabitEthernet0/1
+       network 10.1.129.0 0.0.0.255 area 0
+       default-information originate metric-type 1
+      !
+      router ospf 100
+       router-id 10.1.128.254
+       redistribute ospf 300 metric-type 1 subnets
+       passive-interface default
+       no passive-interface GigabitEthernet0/2
+       network 10.1.128.0 0.0.0.255 area 5
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      ip access-list extended CAPWAP
+       permit udp any any eq 5246
+       permit udp any any eq 5247
+      ip access-list extended RS1_10.2.0.0
+       permit ip any 10.2.0.0 0.0.15.255
+      ip access-list extended RS2_10.2.16.0
+       permit ip any 10.2.16.0 0.0.15.255
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n9
+    label: iosv-3
+    node_definition: iosv
+    x: -200
+    y: 150
+    configuration: |-
+      !
+      ! Last configuration change at 01:34:16 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname VPN_AGG
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip vrf PUBLIC
+       rd 65512:1
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      crypto keyring DMVPN vrf PUBLIC
+        pre-shared-key address 0.0.0.0 0.0.0.0 key cisco
+      !
+      !
+      !
+      !
+      crypto isakmp policy 100
+       encr aes 256
+       authentication pre-share
+       group 2
+      crypto isakmp profile FVRF_ISA_PUBLIC
+         keyring DMVPN
+         match identity address 0.0.0.0 PUBLIC
+      !
+      !
+      crypto ipsec transform-set AES256/SHA/TRANSPORT esp-aes 256 esp-sha-hmac
+       mode transport
+      !
+      crypto ipsec profile DMVPN_PROFILE
+       set transform-set AES256/SHA/TRANSPORT
+       set isakmp-profile FVRF_ISA_PUBLIC
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.128.252 255.255.255.255
+      !
+      interface Loopback1
+       ip address 10.1.128.251 255.255.255.255
+      !
+      interface Tunnel10
+       description ###TO_REMOTESITE###
+       ip address 10.1.130.1 255.255.255.0
+       no ip redirects
+       ip mtu 1354
+       ip nhrp authentication cisco
+       ip nhrp network-id 130
+       ip tcp adjust-mss 1314
+       ip ospf network broadcast
+       ip ospf priority 255
+       tunnel source Dialer1
+       tunnel mode gre multipoint
+       tunnel vrf PUBLIC
+       tunnel protection ipsec profile DMVPN_PROFILE
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.61 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_PUBLIC###
+       ip vrf forwarding PUBLIC
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       pppoe enable group global
+       pppoe-client dial-pool-number 1
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_DISTRIBUTION_SOUTH###
+       ip address 10.1.128.6 255.255.255.252
+       ip ospf network point-to-point
+       duplex auto
+       speed auto
+       media-type rj45
+        ! inserted by converter
+        no shutdown
+      !
+      interface Dialer1
+       description ###TO_VPN###
+       mtu 1492
+       ip vrf forwarding PUBLIC
+       ip address negotiated
+       encapsulation ppp
+       dialer pool 1
+       ppp authentication chap callin
+       ppp chap hostname VPN_AGG@cvn5000000000
+       ppp chap password 0 VPN_AGG
+      !
+      router ospf 200
+       router-id 10.1.128.251
+       passive-interface default
+       no passive-interface Tunnel10
+       network 10.1.130.0 0.0.0.255 area 0
+       default-information originate metric-type 1
+      !
+      router ospf 100
+       router-id 10.1.128.252
+       redistribute ospf 200 metric-type 1 subnets
+       passive-interface default
+       no passive-interface GigabitEthernet0/2
+       network 10.1.128.0 0.0.0.255 area 5
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route vrf PUBLIC 0.0.0.0 0.0.0.0 Dialer1
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n10
+    label: iosv-4
+    node_definition: iosv
+    x: 0
+    y: 100
+    configuration: |-
+      !
+      ! Last configuration change at 01:40:11 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname INET_ADGE
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      class-map type inspect match-any INSIDE-TO-OUTSIDE-CLASS
+       match protocol ftp
+       match protocol tcp
+       match protocol udp
+       match protocol icmp
+      class-map type inspect match-any SELF-TO-OUTSIDE-CLASS
+       match access-group name SELF-TO-OUTSIDE-ACL
+      class-map type inspect match-any OUTSIDE-TO-SELF-CLASS
+       match access-group name OUTSIDE-TO-SELF-ACL
+      !
+      policy-map type inspect SELF-TO-OUTSIDE-POLICY
+       class type inspect SELF-TO-OUTSIDE-CLASS
+        inspect
+       class class-default
+        drop
+      policy-map type inspect OUTSIDE-TO-SELF-POLICY
+       class type inspect OUTSIDE-TO-SELF-CLASS
+        inspect
+       class class-default
+        drop
+      policy-map type inspect INSIDE-TO-OUTSIDE-POLICY
+       class type inspect INSIDE-TO-OUTSIDE-CLASS
+        inspect
+       class class-default
+        drop
+      !
+      zone security INSIDE
+      zone security OUTSIDE
+      zone-pair security INSIDE-TO-OUTSIDE source INSIDE destination OUTSIDE
+       service-policy type inspect INSIDE-TO-OUTSIDE-POLICY
+      zone-pair security SELF-TO-OUTSIDE source self destination OUTSIDE
+       service-policy type inspect SELF-TO-OUTSIDE-POLICY
+      zone-pair security OUTSIDE-TO-SELF source OUTSIDE destination self
+       service-policy type inspect OUTSIDE-TO-SELF-POLICY
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.1.128.250 255.255.255.255
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.53 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_PUBLIC###
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       pppoe enable group global
+       pppoe-client dial-pool-number 1
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_DISTRIBUTION_SOUTH###
+       ip address 10.1.128.10 255.255.255.252
+       ip nat inside
+       ip virtual-reassembly in
+       zone-member security INSIDE
+       ip ospf network point-to-point
+       duplex auto
+       speed auto
+       media-type rj45
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface Dialer1
+       description ###TO_INET###
+       mtu 1492
+       ip address negotiated
+       ip nat outside
+       ip virtual-reassembly in
+       zone-member security OUTSIDE
+       encapsulation ppp
+       dialer pool 1
+       ppp authentication chap callin
+       ppp chap hostname INET_EDGE@virl.com
+       ppp chap password 0 INET_EDGE
+       ppp ipcp dns request accept
+      !
+      router ospf 100
+       router-id 10.1.128.250
+       passive-interface default
+       no passive-interface GigabitEthernet0/2
+       network 10.1.128.0 0.0.0.255 area 5
+       default-information originate always metric-type 1
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip dns server
+      ip nat inside source list PAT interface Dialer1 overload
+      ip route 0.0.0.0 0.0.0.0 Dialer1
+      !
+      ip access-list extended OUTSIDE-TO-SELF-ACL
+       permit icmp any any echo
+       permit icmp any any echo-reply
+       permit icmp any any ttl-exceeded
+       permit icmp any any port-unreachable
+       permit udp any any gt 1023 ttl eq 1
+      ip access-list extended PAT
+       permit ip 10.0.0.0 0.255.255.255 any
+      ip access-list extended SELF-TO-OUTSIDE-ACL
+       permit icmp any any
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n11
+    label: unmanaged-switch-0
+    node_definition: unmanaged_switch
+    x: -350
+    y: 250
+    configuration: ''
+    tags: []
+    interfaces:
+      - id: i0
+        slot: 0
+        label: port0
+        type: physical
+      - id: i1
+        slot: 1
+        label: port1
+        type: physical
+      - id: i2
+        slot: 2
+        label: port2
+        type: physical
+      - id: i3
+        slot: 3
+        label: port3
+        type: physical
+      - id: i4
+        slot: 4
+        label: port4
+        type: physical
+      - id: i5
+        slot: 5
+        label: port5
+        type: physical
+      - id: i6
+        slot: 6
+        label: port6
+        type: physical
+      - id: i7
+        slot: 7
+        label: port7
+        type: physical
+  - id: n12
+    label: iosv-5
+    node_definition: iosv
+    x: -50
+    y: 250
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:18 UTC Sat Jun 1 2019
+      !
+      version 15.6
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname CISCO_BAS
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      aaa new-model
+      !
+      !
+      aaa authentication ppp yoshi-authentication local
+      aaa authorization network yoshi-authorization local
+      !
+      aaa attribute list INET_EDGE
+       attribute type addr 10.254.5.1 service ppp protocol ip
+       attribute type netmask 255.255.255.255 service ppp protocol ip
+       attribute type ip-unnumbered "loopback0" service ppp protocol ip
+       attribute type ppp-authen-list "yoshi-authentication"
+       attribute type ppp-author-list "yoshi-authorization"
+      !
+      aaa attribute list VPN_AGG
+       attribute type addr 192.168.100.1 service ppp protocol ip
+       attribute type netmask 255.255.255.255 service ppp protocol ip
+       attribute type ip-unnumbered "loopback0" service ppp protocol ip
+       attribute type ppp-authen-list "yoshi-authentication"
+       attribute type ppp-author-list "yoshi-authorization"
+      !
+      aaa attribute list VPN_RS1
+       attribute type addr 192.168.100.2 service ppp protocol ip
+       attribute type netmask 255.255.255.255 service ppp protocol ip
+       attribute type ip-unnumbered "loopback0" service ppp protocol ip
+       attribute type ppp-authen-list "yoshi-authentication"
+       attribute type ppp-author-list "yoshi-authorization"
+      !
+      aaa attribute list SINGLE_RS2
+       attribute type addr 192.168.100.3 service ppp protocol ip
+       attribute type netmask 255.255.255.255 service ppp protocol ip
+       attribute type ip-unnumbered "loopback0" service ppp protocol ip
+       attribute type ppp-authen-list "yoshi-authentication"
+       attribute type ppp-author-list "yoshi-authorization"
+      !
+      !
+      !
+      !
+      !
+      aaa session-id common
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip name-server 8.8.8.8
+      ip name-server 8.8.4.4
+      ip cef
+      ipv6 unicast-routing
+      ipv6 cef
+      ipv6 dhcp pool DELEGATION
+       prefix-delegation pool DELEGATION-POOL lifetime 1800 600
+       dns-server 2001:4860:4860::8888
+       domain-name ccie.com
+      !
+      ipv6 dhcp pool OTHERCONFIG
+       dns-server 2001:4860:4860::8888
+       domain-name ccie.com
+      !
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      username masanobu privilege 15 password 0 masanobu
+      username VPN_AGG@cvn5000000000 password 0 VPN_AGG
+      username VPN_AGG@cvn5000000000 aaa attribute list VPN_AGG
+      username VPN_RS1@cvn5000000000 password 0 VPN_RS1
+      username VPN_RS1@cvn5000000000 aaa attribute list VPN_RS1
+      username SINGLE_RS2@cvn5000000000 password 0 SINGLE_RS2
+      username SINGLE_RS2@cvn5000000000 aaa attribute list SINGLE_RS2
+      username INET_EDGE@virl.com password 0 INET_EDGE
+      username INET_EDGE@virl.com aaa attribute list INET_EDGE
+      username lanwan.ine@gmail.com password 0 Cisco.virl777 privi 15
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      bba-group pppoe nob
+       virtual-template 5
+       sessions per-mac limit 10
+      !
+      bba-group pppoe yoshi
+       virtual-template 5
+       sessions per-mac limit 10
+      !
+      bba-group pppoe kayama
+       virtual-template 6
+       sessions per-mac limit 10
+      !
+      bba-group pppoe nakata
+       virtual-template 7
+       sessions per-mac limit 10
+      !
+      !
+      interface Loopback0
+       ip address 1.2.3.4 255.255.255.255
+       ip nat outside
+       ip virtual-reassembly in
+      !
+      interface Loopback5
+       ip address 10.128.1.1 255.255.255.0
+       ip virtual-reassembly in
+      !
+      interface Loopback8888
+       no ip address
+       ipv6 address 2001:4860:4860::8888/64
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.26 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description TO_VPN_AGG
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       ipv6 address 2001:A::1/64
+       ipv6 nd other-config-flag
+       ipv6 dhcp server OTHERCONFIG
+       pppoe enable group nob
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/2
+       description TO_VPN_RS1
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       ipv6 address 2001:B::1/64
+       ipv6 nd other-config-flag
+       ipv6 dhcp server OTHERCONFIG
+       pppoe enable group yoshi
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/3
+       description TO_SINGLE_RS2
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       ipv6 address 2001:C::1/64
+       ipv6 nd other-config-flag
+       ipv6 dhcp server OTHERCONFIG
+       pppoe enable group kayama
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/4
+       description TO_INET_EDGE
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       ipv6 address 2001:D::1/64
+       ipv6 nd other-config-flag
+       ipv6 dhcp server OTHERCONFIG
+       pppoe enable group nakata
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/5
+       description TO_EXTERNAL
+       ip address 172.16.2.52 255.255.255.0
+       ip nat inside
+       ip virtual-reassembly in
+       duplex auto
+       speed auto
+       media-type rj45
+          ! inserted by converter
+          no shutdown
+      !
+      interface Virtual-Template4
+       mtu 1454
+       ip unnumbered Loopback0
+       ip access-group net-deny in
+       no peer default ip address
+       ppp authentication chap yoshi-authentication
+       ppp authorization yoshi-authorization
+       ppp ipcp dns 8.8.8.8 8.8.4.4
+      !
+      interface Virtual-Template5
+       mtu 1454
+       ip unnumbered Loopback0
+       ip access-group net-deny in
+       no peer default ip address
+       ppp authentication chap yoshi-authentication
+       ppp authorization yoshi-authorization
+       ppp ipcp dns 8.8.8.8 8.8.4.4
+      !
+      interface Virtual-Template6
+       mtu 1454
+       ip unnumbered Loopback0
+       ip access-group net-deny in
+       no peer default ip address
+       ppp authentication chap yoshi-authentication
+       ppp authorization yoshi-authorization
+       ppp ipcp dns 8.8.8.8 8.8.4.4
+      !
+      interface Virtual-Template7
+       mtu 1454
+       ip unnumbered Loopback0
+       ip access-group net-deny in
+       ip nat inside
+       ip virtual-reassembly in
+       no peer default ip address
+       ppp authentication chap yoshi-authentication
+       ppp authorization yoshi-authorization
+       ppp ipcp dns 8.8.8.8 8.8.4.4
+      !
+      ip forward-protocol nd
+      !
+      !
+      ip http server
+      ip http authentication local
+      no ip http secure-server
+      ip dns server
+      ip nat inside source static 172.16.2.100 1.2.3.4
+      ip route 0.0.0.0 0.0.0.0 192.168.1.233
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      ip access-list extended net-deny
+       deny   ip 10.254.0.0 0.0.255.255 10.128.0.0 0.0.255.255
+       permit ip any any
+      !
+      ipv6 local pool DELEGATION-POOL 2001:DE1E::/40 48
+      ipv6 ioam timestamp
+      !
+      !
+      access-list 101 permit ip 192.168.101.0 0.0.0.255 192.168.101.0 0.0.0.255
+      !
+      radius-server attribute nas-port format d
+      !
+      !
+      ipv6 access-list DEBUG
+       permit ipv6 any any
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+      - id: i5
+        slot: 4
+        label: GigabitEthernet0/4
+        type: physical
+  - id: n13
+    label: iosv-6
+    node_definition: iosv
+    x: -450
+    y: 400
+    configuration: |-
+      !
+      ! Last configuration change at 02:59:48 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname L2WAN_RS1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      track 50 ip sla 100 reachability
+      !
+      !
+      class-map match-any TRANSACTIONAL_DATA
+       match dscp af21
+       match dscp af22
+       match dscp af23
+      class-map match-any OPS_ADMIN_MNGM
+       match dscp cs2
+      class-map match-any MULTIMEDIA_STREAMING
+       match dscp af31
+       match dscp af32
+       match dscp af33
+      class-map match-all MARKING_IN#TUNNELED-NBAR
+       match access-group name CAPWAP
+      class-map match-all MARKING_IN#REAL-TIME_INTERACTIVE
+       match protocol attribute traffic-class real-time-interactive
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#MULTIMEDIA_STREAMING
+       match protocol attribute traffic-class multimedia-streaming
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#OPS_ADMIN_MNGM
+       match protocol attribute traffic-class ops-admin-mgmt
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#TRANSACTIONAL_DATA
+       match protocol attribute traffic-class transactional-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-any REAL-TIME_INTERACTIVE
+       match dscp cs4
+      class-map match-any NETWORK_CONTROL
+       match dscp cs6
+       match protocol icmp potentially
+      class-map match-any MULTIMEDIA_CONFERENCE
+       match dscp af41
+       match dscp af42
+       match dscp af43
+      class-map match-any BROADCAST_VIDEO
+       match dscp cs5
+      class-map match-any VOICE
+       match dscp ef
+      class-map match-any SCAVENGER
+       match dscp cs1
+      class-map match-any SIGNALING
+       match dscp cs3
+      class-map match-any BULK_DATA
+       match dscp af11
+       match dscp af12
+       match dscp af13
+      class-map match-all MARKING_IN#MULTIMEDIA_CONFERENCE
+       match protocol attribute traffic-class multimedia-conferencing
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#NETWORK_CONTROL
+       match protocol attribute traffic-class network-control
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SIGNALING
+       match protocol attribute traffic-class signaling
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BULK_DATA
+       match protocol attribute traffic-class bulk-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SCAVENGER
+       match protocol attribute business-relevance business-irrelevant
+      class-map match-all MARKING_IN#VOICE
+       match protocol attribute traffic-class voip-telephony
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BROADCAST_VIDEO
+       match protocol attribute traffic-class broadcast-video
+       match protocol attribute business-relevance business-relevant
+      !
+      policy-map L2WAN
+       class VOICE
+        police rate percent 10
+        priority
+       class BROADCAST_VIDEO
+        police rate percent 10
+        priority
+       class REAL-TIME_INTERACTIVE
+        police rate percent 13
+        priority
+       class NETWORK_CONTROL
+        bandwidth remaining percent 4
+       class SIGNALING
+        bandwidth remaining percent 3
+       class OPS_ADMIN_MNGM
+        bandwidth remaining percent 3
+       class MULTIMEDIA_CONFERENCE
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class MULTIMEDIA_STREAMING
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class TRANSACTIONAL_DATA
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class BULK_DATA
+        bandwidth remaining percent 6
+        fair-queue
+        random-detect dscp-based
+       class SCAVENGER
+        bandwidth remaining percent 1
+       class class-default
+        bandwidth remaining percent 38
+        fair-queue
+        random-detect dscp-based
+      policy-map QUEUE_OUT
+       class class-default
+        shape average 128000
+         service-policy L2WAN
+      policy-map MARKING_IN
+       class MARKING_IN#TUNNELED-NBAR
+       class MARKING_IN#VOICE
+        set dscp ef
+       class MARKING_IN#BROADCAST_VIDEO
+        set dscp cs5
+       class MARKING_IN#REAL-TIME_INTERACTIVE
+        set dscp cs4
+       class MARKING_IN#MULTIMEDIA_CONFERENCE
+        set dscp af41
+       class MARKING_IN#MULTIMEDIA_STREAMING
+        set dscp af31
+       class MARKING_IN#NETWORK_CONTROL
+        set dscp cs6
+       class MARKING_IN#SIGNALING
+        set dscp cs3
+       class MARKING_IN#OPS_ADMIN_MNGM
+        set dscp cs2
+       class MARKING_IN#TRANSACTIONAL_DATA
+        set dscp af21
+       class MARKING_IN#BULK_DATA
+        set dscp af11
+       class MARKING_IN#SCAVENGER
+        set dscp cs1
+       class class-default
+        set dscp default
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.2.255.1 255.255.255.255
+      !
+      interface Loopback1
+       ip address 10.2.255.2 255.255.255.255
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.54 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_L2WAN###
+       ip address 10.1.129.2 255.255.255.0
+       ip ospf network point-to-multipoint non-broadcast
+       ip ospf hello-interval 1
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       service-policy output QUEUE_OUT
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       service-policy input MARKING_IN
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.100
+       description ###RS1_DATA###
+       encapsulation dot1Q 100
+       ip address 10.2.0.2 255.255.255.0
+       standby version 2
+       standby 100 ip 10.2.0.1
+       standby 100 priority 110
+       standby 100 preempt
+       standby 100 authentication md5 key-string cisco
+       standby 100 name VLAN100
+       standby 100 track 50 decrement 10
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.101
+       description ###RS1_VOICE###
+       encapsulation dot1Q 101
+       ip address 10.2.1.2 255.255.255.0
+       standby version 2
+       standby 101 ip 10.2.1.1
+       standby 101 priority 110
+       standby 101 preempt
+       standby 101 authentication md5 key-string cisco
+       standby 101 name VLAN101
+       standby 101 track 50 decrement 10
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.115
+       description ###RS1_TRANSIT###
+       encapsulation dot1Q 115
+       ip address 10.2.15.1 255.255.255.128
+        ! inserted by converter
+        no shutdown
+      !
+      router ospf 300
+       router-id 10.2.255.1
+       area 1 range 10.2.0.0 255.255.240.0
+       passive-interface default
+       no passive-interface GigabitEthernet0/1
+       network 10.1.129.0 0.0.0.255 area 0
+       network 10.2.0.0 0.0.15.255 area 1
+       network 10.2.255.0 0.0.0.255 area 1
+       neighbor 10.1.129.1
+      !
+      router ospf 100
+       router-id 10.2.255.2
+       passive-interface default
+       no passive-interface GigabitEthernet0/2.115
+       network 10.2.15.0 0.0.0.255 area 0
+       default-information originate
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      ip sla 100
+       icmp-echo 10.1.129.1 source-interface GigabitEthernet0/1
+       frequency 5
+      ip sla schedule 100 life forever start-time now
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n14
+    label: iosv-7
+    node_definition: iosv
+    x: -250
+    y: 400
+    configuration: |-
+      !
+      ! Last configuration change at 01:37:50 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname VPN_RS1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip vrf PUBLIC
+       rd 65512:1
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      crypto keyring DMVPN vrf PUBLIC
+        pre-shared-key address 0.0.0.0 0.0.0.0 key cisco
+      !
+      !
+      !
+      !
+      crypto isakmp policy 100
+       encr aes 256
+       authentication pre-share
+       group 2
+      crypto isakmp profile FVRF_ISA_PUBLIC
+         keyring DMVPN
+         match identity address 0.0.0.0 PUBLIC
+      !
+      !
+      crypto ipsec transform-set AES256/SHA/TRANSPORT esp-aes 256 esp-sha-hmac
+       mode transport
+      !
+      crypto ipsec profile DMVPN_PROFILE
+       set transform-set AES256/SHA/TRANSPORT
+       set isakmp-profile FVRF_ISA_PUBLIC
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.2.255.3 255.255.255.255
+      !
+      interface Loopback1
+       ip address 10.2.255.4 255.255.255.255
+      !
+      interface Tunnel10
+       description ###TO_REMOTESITE###
+       ip address 10.1.130.2 255.255.255.0
+       no ip redirects
+       ip mtu 1354
+       ip nhrp authentication cisco
+       ip nhrp map 10.1.130.1 192.168.100.1
+       ip nhrp map multicast 192.168.100.1
+       ip nhrp network-id 130
+       ip nhrp nhs 10.1.130.1
+       no ip nhrp shortcut
+       ip tcp adjust-mss 1314
+       ip ospf network broadcast
+       ip ospf priority 0
+       tunnel source Dialer1
+       tunnel mode gre multipoint
+       tunnel vrf PUBLIC
+       tunnel protection ipsec profile DMVPN_PROFILE
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.62 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_PUBLIC###
+       ip vrf forwarding PUBLIC
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       pppoe enable group global
+       pppoe-client dial-pool-number 1
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.100
+       description ###RS1_DATA###
+       encapsulation dot1Q 100
+       ip address 10.2.0.3 255.255.255.0
+       standby version 2
+       standby 100 ip 10.2.0.1
+       standby 100 priority 105
+       standby 100 preempt
+       standby 100 authentication md5 key-string cisco
+       standby 100 name VLAN100
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.101
+       description ###RS1_VOICE###
+       encapsulation dot1Q 101
+       ip address 10.2.1.3 255.255.255.0
+       standby version 2
+       standby 101 ip 10.2.1.1
+       standby 101 priority 105
+       standby 101 preempt
+       standby 101 authentication md5 key-string cisco
+       standby 101 name VLAN101
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2.115
+       description ###RS1_TRANSIT###
+       encapsulation dot1Q 115
+       ip address 10.2.15.2 255.255.255.128
+        ! inserted by converter
+        no shutdown
+      !
+      interface Dialer1
+       description ###TO_VPN###
+       mtu 1492
+       ip vrf forwarding PUBLIC
+       ip address negotiated
+       ip access-group ACL_INET_PUBLIC in
+       encapsulation ppp
+       dialer pool 1
+       ppp authentication chap callin
+       ppp chap hostname VPN_RS1@cvn5000000000
+       ppp chap password 0 VPN_RS1
+      !
+      router ospf 200
+       router-id 10.2.255.3
+       area 1 range 10.2.0.0 255.255.240.0
+       passive-interface default
+       no passive-interface Tunnel10
+       network 10.1.130.0 0.0.0.255 area 0
+       network 10.2.0.0 0.0.15.255 area 1
+       network 10.2.255.0 0.0.0.255 area 1
+      !
+      router ospf 100
+       router-id 10.2.255.4
+       passive-interface default
+       no passive-interface GigabitEthernet0/2.115
+       network 10.2.15.0 0.0.0.255 area 0
+       default-information originate
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route vrf PUBLIC 0.0.0.0 0.0.0.0 Dialer1
+      !
+      ip access-list extended ACL_INET_PUBLIC
+       permit udp any any eq non500-isakmp
+       permit udp any any eq isakmp
+       permit esp any any
+       permit icmp any any echo
+       permit icmp any any echo-reply
+       permit icmp any any ttl-exceeded
+       permit icmp any any port-unreachable
+       permit udp any any gt 1023 ttl eq 1
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n15
+    label: iosvl2-6
+    node_definition: iosvl2
+    x: -350
+    y: 500
+    configuration: |-
+      !
+      ! Last configuration change at 22:42:00 UTC Sat Jun 1 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname ACC_RS1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      no ip routing
+      !
+      !
+      !
+      no ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      vlan internal allocation policy ascending
+      !
+      vlan 100-101,115
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ###TO_L2WAN_RS1###
+       switchport trunk allowed vlan 100,101,115
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###VPN_RS1###
+       switchport trunk allowed vlan 100,101,115
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/3
+       description ###TO_NODE_RS1###
+       switchport access vlan 100
+       switchport mode access
+       switchport voice vlan 101
+       media-type rj45
+       negotiation auto
+       spanning-tree portfast edge
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet1/0
+       media-type rj45
+       negotiation auto
+          ! inserted by converter
+          no shutdown
+      !
+      interface Vlan100
+       ip address 10.2.0.254 255.255.255.0
+      !
+      ip default-gateway 10.2.0.1
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n16
+    label: iosv-8
+    node_definition: iosv
+    x: -350
+    y: 650
+    configuration: |-
+      !
+      ! Last configuration change at 01:27:05 UTC Wed Sep 4 2019
+      !
+      version 15.6
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname NODE_RS1
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.97 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 10.2.0.100 255.255.255.0
+       ip virtual-reassembly in
+       duplex auto
+       speed auto
+       media-type rj45
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/2
+       no ip address
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 10.2.0.1
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n17
+    label: iosv-9
+    node_definition: iosv
+    x: -50
+    y: 400
+    configuration: |-
+      !
+      ! Last configuration change at 03:04:47 UTC Wed Sep 18 2019
+      !
+      version 15.7
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname SINGLE_RS2
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip vrf PUBLIC
+       rd 65512:1
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      class-map match-any TRANSACTIONAL_DATA
+       match dscp af21
+       match dscp af22
+       match dscp af23
+      class-map match-any OPS_ADMIN_MNGM
+       match dscp cs2
+      class-map match-any MULTIMEDIA_STREAMING
+       match dscp af31
+       match dscp af32
+       match dscp af33
+      class-map match-all MARKING_IN#TUNNELED-NBAR
+       match access-group name CAPWAP
+      class-map match-all MARKING_IN#REAL-TIME_INTERACTIVE
+       match protocol attribute traffic-class real-time-interactive
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#MULTIMEDIA_STREAMING
+       match protocol attribute traffic-class multimedia-streaming
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#OPS_ADMIN_MNGM
+       match protocol attribute traffic-class ops-admin-mgmt
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#TRANSACTIONAL_DATA
+       match protocol attribute traffic-class transactional-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-any REAL-TIME_INTERACTIVE
+       match dscp cs4
+      class-map match-any NETWORK_CONTROL
+       match dscp cs6
+       match protocol icmp potentially
+      class-map match-any MULTIMEDIA_CONFERENCE
+       match dscp af41
+       match dscp af42
+       match dscp af43
+      class-map match-any BROADCAST_VIDEO
+       match dscp cs5
+      class-map match-any VOICE
+       match dscp ef
+      class-map match-any SCAVENGER
+       match dscp cs1
+      class-map match-any SIGNALING
+       match dscp cs3
+      class-map match-any BULK_DATA
+       match dscp af11
+       match dscp af12
+       match dscp af13
+      class-map match-all MARKING_IN#MULTIMEDIA_CONFERENCE
+       match protocol attribute traffic-class multimedia-conferencing
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#NETWORK_CONTROL
+       match protocol attribute traffic-class network-control
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SIGNALING
+       match protocol attribute traffic-class signaling
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BULK_DATA
+       match protocol attribute traffic-class bulk-data
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#SCAVENGER
+       match protocol attribute business-relevance business-irrelevant
+      class-map match-all MARKING_IN#VOICE
+       match protocol attribute traffic-class voip-telephony
+       match protocol attribute business-relevance business-relevant
+      class-map match-all MARKING_IN#BROADCAST_VIDEO
+       match protocol attribute traffic-class broadcast-video
+       match protocol attribute business-relevance business-relevant
+      !
+      policy-map L2WAN
+       class VOICE
+        police rate percent 10
+        priority
+       class BROADCAST_VIDEO
+        police rate percent 10
+        priority
+       class REAL-TIME_INTERACTIVE
+        police rate percent 13
+        priority
+       class NETWORK_CONTROL
+        bandwidth remaining percent 4
+       class SIGNALING
+        bandwidth remaining percent 3
+       class OPS_ADMIN_MNGM
+        bandwidth remaining percent 3
+       class MULTIMEDIA_CONFERENCE
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class MULTIMEDIA_STREAMING
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class TRANSACTIONAL_DATA
+        bandwidth remaining percent 15
+        fair-queue
+        random-detect dscp-based
+       class BULK_DATA
+        bandwidth remaining percent 6
+        fair-queue
+        random-detect dscp-based
+       class SCAVENGER
+        bandwidth remaining percent 1
+       class class-default
+        bandwidth remaining percent 38
+        fair-queue
+        random-detect dscp-based
+      policy-map QUEUE_OUT
+       class class-default
+        shape average 128000
+         service-policy L2WAN
+      policy-map MARKING_IN
+       class MARKING_IN#TUNNELED-NBAR
+       class MARKING_IN#VOICE
+        set dscp ef
+       class MARKING_IN#BROADCAST_VIDEO
+        set dscp cs5
+       class MARKING_IN#REAL-TIME_INTERACTIVE
+        set dscp cs4
+       class MARKING_IN#MULTIMEDIA_CONFERENCE
+        set dscp af41
+       class MARKING_IN#MULTIMEDIA_STREAMING
+        set dscp af31
+       class MARKING_IN#NETWORK_CONTROL
+        set dscp cs6
+       class MARKING_IN#SIGNALING
+        set dscp cs3
+       class MARKING_IN#OPS_ADMIN_MNGM
+        set dscp cs2
+       class MARKING_IN#TRANSACTIONAL_DATA
+        set dscp af21
+       class MARKING_IN#BULK_DATA
+        set dscp af11
+       class MARKING_IN#SCAVENGER
+        set dscp cs1
+       class class-default
+        set dscp default
+      !
+      !
+      crypto keyring DMVPN vrf PUBLIC
+        pre-shared-key address 0.0.0.0 0.0.0.0 key cisco
+      !
+      !
+      !
+      !
+      crypto isakmp policy 100
+       encr aes 256
+       authentication pre-share
+       group 2
+      crypto isakmp profile FVRF_ISA_PUBLIC
+         keyring DMVPN
+         match identity address 0.0.0.0 PUBLIC
+      !
+      !
+      crypto ipsec transform-set AES256/SHA/TRANSPORT esp-aes 256 esp-sha-hmac
+       mode transport
+      !
+      crypto ipsec profile DMVPN_PROFILE
+       set transform-set AES256/SHA/TRANSPORT
+       set isakmp-profile FVRF_ISA_PUBLIC
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface Loopback0
+       ip address 10.2.255.5 255.255.255.255
+      !
+      interface Loopback1
+       ip address 10.2.255.6 255.255.255.255
+      !
+      interface Tunnel10
+       description ###TO_REMOTESITE###
+       ip address 10.1.130.3 255.255.255.0
+       no ip redirects
+       ip mtu 1354
+       ip nhrp authentication cisco
+       ip nhrp map 10.1.130.1 192.168.100.1
+       ip nhrp map multicast 192.168.100.1
+       ip nhrp network-id 130
+       ip nhrp nhs 10.1.130.1
+       no ip nhrp shortcut
+       ip tcp adjust-mss 1314
+       ip ospf network broadcast
+       ip ospf priority 0
+       tunnel source Dialer1
+       tunnel mode gre multipoint
+       tunnel vrf PUBLIC
+       tunnel protection ipsec profile DMVPN_PROFILE
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.60 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       description ###TO_L2WAN###
+       ip address 10.1.129.3 255.255.255.0
+       ip ospf network point-to-multipoint non-broadcast
+       ip ospf hello-interval 1
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       service-policy output QUEUE_OUT
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_PUBLIC###
+       ip vrf forwarding PUBLIC
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       no cdp enable
+       pppoe enable group global
+       pppoe-client dial-pool-number 1
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3
+       no ip address
+       duplex auto
+       speed auto
+       media-type rj45
+       service-policy input MARKING_IN
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3.100
+       description ###RS2_DATA###
+       encapsulation dot1Q 100
+       ip address 10.2.16.1 255.255.255.0
+        ! inserted by converter
+        no shutdown
+      !
+      interface GigabitEthernet0/3.101
+       description ###RS2_VOICE###
+       encapsulation dot1Q 101
+       ip address 10.2.17.1 255.255.255.0
+        ! inserted by converter
+        no shutdown
+      !
+      interface Dialer1
+       description ###TO_VPN###
+       mtu 1492
+       ip vrf forwarding PUBLIC
+       ip address negotiated
+       ip access-group ACL_INET_PUBLIC in
+       encapsulation ppp
+       dialer pool 1
+       ppp authentication chap callin
+       ppp chap hostname SINGLE_RS2@cvn5000000000
+       ppp chap password 0 SINGLE_RS2
+      !
+      router ospf 300
+       router-id 10.2.255.5
+       area 2 range 10.2.16.0 255.255.240.0
+       passive-interface default
+       no passive-interface GigabitEthernet0/1
+       network 10.1.129.0 0.0.0.255 area 0
+       network 10.2.16.0 0.0.15.255 area 2
+       network 10.2.255.0 0.0.0.255 area 2
+       neighbor 10.1.129.1
+      !
+      router ospf 200
+       router-id 10.2.255.6
+       summary-address 10.2.16.0 255.255.240.0
+       redistribute ospf 300 metric-type 1 subnets
+       passive-interface default
+       no passive-interface Tunnel10
+       network 10.1.130.0 0.0.0.255 area 0
+       distribute-list DISTRIBUTE_LOCAL_ONLY out ospf 300
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route vrf PUBLIC 0.0.0.0 0.0.0.0 Dialer1
+      !
+      ip access-list standard ONLY_LOCAL_NET_REDIS
+       permit 10.2.16.0 0.0.15.255
+       permit 10.2.255.0 0.0.0.255
+      !
+      ip access-list extended ACL_INET_PUBLIC
+       permit udp any any eq non500-isakmp
+       permit udp any any eq isakmp
+       permit esp any any
+       permit icmp any any echo
+       permit icmp any any echo-reply
+       permit icmp any any ttl-exceeded
+       permit icmp any any port-unreachable
+       permit udp any any gt 1023 ttl eq 1
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n18
+    label: iosvl2-7
+    node_definition: iosvl2
+    x: -50
+    y: 500
+    configuration: |-
+      !
+      ! Last configuration change at 22:42:17 UTC Sat Jun 1 2019
+      !
+      version 15.2
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      service compress-config
+      !
+      hostname ACC_RS2
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      !
+      !
+      vtp mode transparent
+      no ip routing
+      !
+      !
+      !
+      no ip cef
+      no ipv6 cef
+      !
+      !
+      !
+      spanning-tree mode pvst
+      spanning-tree extend system-id
+      !
+      vlan internal allocation policy ascending
+      !
+      vlan 100-101,115
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       shutdown
+       media-type rj45
+       negotiation auto
+      !
+      interface GigabitEthernet0/1
+       description ###TO_SINGLE_RS2###
+       switchport trunk allowed vlan 100,101,115
+       switchport trunk encapsulation dot1q
+       switchport mode trunk
+       media-type rj45
+       negotiation auto
+          ! inserted by converter
+          no shutdown
+      !
+      interface GigabitEthernet0/2
+       description ###TO_NODE_RS2###
+       switchport access vlan 100
+       switchport mode access
+       switchport voice vlan 101
+       media-type rj45
+       negotiation auto
+       spanning-tree portfast edge
+          ! inserted by converter
+          no shutdown
+      !
+      interface Vlan100
+       ip address 10.2.16.254 255.255.255.0
+      !
+      ip default-gateway 10.2.16.1
+      ip forward-protocol nd
+      !
+      no ip http server
+      no ip http secure-server
+      !
+      !
+      !
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      !
+      end
+    image_definition: iosvl2-2019
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+  - id: n19
+    label: iosv-10
+    node_definition: iosv
+    x: -50
+    y: 650
+    configuration: |-
+      !
+      ! Last configuration change at 22:41:47 UTC Sat Jun 1 2019
+      !
+      version 15.6
+      service timestamps debug datetime msec
+      service timestamps log datetime msec
+      no service password-encryption
+      !
+      hostname NODE_RS2
+      !
+      boot-start-marker
+      boot-end-marker
+      !
+      !
+      enable password cisco
+      !
+      no aaa new-model
+      !
+      !
+      !
+      mmi polling-interval 60
+      no mmi auto-configure
+      no mmi pvc
+      mmi snmp-timeout 180
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      ip cef
+      no ipv6 cef
+      !
+      multilink bundle-name authenticated
+      !
+      !
+      !
+      !
+      !
+      redundancy
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      !
+      interface GigabitEthernet0/0
+       ip address 10.255.0.25 255.255.0.0
+       shutdown
+       duplex auto
+       speed auto
+       media-type rj45
+      !
+      interface GigabitEthernet0/1
+       ip address 10.2.16.100 255.255.255.0
+       duplex auto
+       speed auto
+       media-type rj45
+          ! inserted by converter
+          no shutdown
+      !
+      ip forward-protocol nd
+      !
+      !
+      no ip http server
+      no ip http secure-server
+      ip route 0.0.0.0 0.0.0.0 10.2.16.1
+      ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+      !
+      ipv6 ioam timestamp
+      !
+      !
+      !
+      control-plane
+      !
+      banner exec `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner incoming `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      banner login `
+      **************************************************************************
+      * IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+      * education. IOSv is provided as-is and is not supported by Cisco's      *
+      * Technical Advisory Center. Any use or disclosure, in whole or in part, *
+      * of the IOSv Software or Documentation to any third party for any       *
+      * purposes is expressly prohibited except as otherwise authorized by     *
+      * Cisco in writing.                                                      *
+      **************************************************************************`
+      !
+      line con 0
+       privilege level 15
+       logging synchronous
+       transport preferred none
+      line aux 0
+      line vty 0 4
+       password cisco
+       login
+       transport preferred none
+       transport input telnet
+      !
+      no scheduler allocate
+      !
+      end
+    image_definition: iosv-158-3
+    tags: []
+    interfaces:
+      - id: i0
+        label: Loopback0
+        type: loopback
+      - id: i1
+        slot: 0
+        label: GigabitEthernet0/0
+        type: physical
+      - id: i2
+        slot: 1
+        label: GigabitEthernet0/1
+        type: physical
+      - id: i3
+        slot: 2
+        label: GigabitEthernet0/2
+        type: physical
+      - id: i4
+        slot: 3
+        label: GigabitEthernet0/3
+        type: physical
+links:
+  - id: l0
+    i1: i2
+    n1: n0
+    i2: i2
+    n2: n1
+  - id: l1
+    i1: i6
+    n1: n0
+    i2: i6
+    n2: n1
+  - id: l2
+    i1: i3
+    n1: n1
+    i2: i3
+    n2: n2
+  - id: l3
+    i1: i7
+    n1: n1
+    i2: i7
+    n2: n2
+  - id: l4
+    i1: i2
+    n1: n2
+    i2: i2
+    n2: n3
+  - id: l5
+    i1: i3
+    n1: n0
+    i2: i3
+    n2: n4
+  - id: l6
+    i1: i7
+    n1: n0
+    i2: i7
+    n2: n4
+  - id: l7
+    i1: i2
+    n1: n4
+    i2: i2
+    n2: n5
+  - id: l8
+    i1: i6
+    n1: n4
+    i2: i6
+    n2: n5
+  - id: l9
+    i1: i3
+    n1: n5
+    i2: i2
+    n2: n6
+  - id: l10
+    i1: i4
+    n1: n0
+    i2: i4
+    n2: n7
+  - id: l11
+    i1: i8
+    n1: n0
+    i2: i8
+    n2: n7
+  - id: l12
+    i1: i5
+    n1: n7
+    i2: i3
+    n2: n8
+  - id: l13
+    i1: i6
+    n1: n7
+    i2: i3
+    n2: n9
+  - id: l14
+    i1: i7
+    n1: n7
+    i2: i3
+    n2: n10
+  - id: l15
+    i1: i2
+    n1: n8
+    i2: i0
+    n2: n11
+  - id: l16
+    i1: i2
+    n1: n9
+    i2: i2
+    n2: n12
+  - id: l17
+    i1: i2
+    n1: n10
+    i2: i5
+    n2: n12
+  - id: l18
+    i1: i2
+    n1: n13
+    i2: i1
+    n2: n11
+  - id: l19
+    i1: i2
+    n1: n17
+    i2: i2
+    n2: n11
+  - id: l20
+    i1: i2
+    n1: n14
+    i2: i3
+    n2: n12
+  - id: l21
+    i1: i3
+    n1: n17
+    i2: i4
+    n2: n12
+  - id: l22
+    i1: i3
+    n1: n13
+    i2: i2
+    n2: n15
+  - id: l23
+    i1: i3
+    n1: n14
+    i2: i3
+    n2: n15
+  - id: l24
+    i1: i4
+    n1: n15
+    i2: i2
+    n2: n16
+  - id: l25
+    i1: i4
+    n1: n17
+    i2: i2
+    n2: n18
+  - id: l26
+    i1: i3
+    n1: n18
+    i2: i2
+    n2: n19
