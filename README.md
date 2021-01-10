@@ -5,30 +5,30 @@
 Cisco Modeling Labs is a tool for building virtual network simulations (or labs) for you to test out new topologies, protocols, and config changes; automate network tests via CI/CD pipeline integration; and learn new things about the cool world of networking. This sandbox provides access to a Cisco Modeling Labs system that can be used to explore the capabilities of the newest release of Cisco Modeling Labs Personal and Enterprise.
 
 With this demo you can deploy a docker container to control multiple CML2s.
-- breakout_tool containaer :  This container provides a telnet connection to the node in CML2.
+- breakout_tool container :  This container provides a telnet connection to the node in CML2.
 - python : This container has the following two functions.
-1. Start, stop, wipe, delete the lab of CML2
-2. Set the breakout tool so that you can connect to the nodes of cml2 with telnet.
-- controller : This container provides you with a UI that controls multiple CML2s. Please use it as a reference for creating a controller, which is your job.
-- selenium-hub : This container controls the selenium chrome container
-- selenium-chrome : This container has a chrome browser.Operate the breakout tool web ui with a chrome browser.
+  1. Start, stop, wipe, delete the lab of CML2
+  2. Set the breakout tool so that you can connect to the nodes of cml2 with telnet.
+- controller container : This container provides you with a UI that controls multiple CML2s. Please use it as a reference for creating a controller, which is your job.
+- selenium-hub container : This container controls the selenium chrome container
+- selenium-chrome container : This container has a chrome browser.Operate the breakout tool web ui with a chrome browser.
 
 ## Pre-requirements
 - Ubuntu 20.04.1 LTS (Focal Fossa) with docker and python3 installed.
 
 ## Installation
 
-### 1.Clone the repository
+### 1. Clone the repository
 ```
 git clone https://github.com/masanobu48154/cml2.git
 ```
 
-### 2.Go into the CML2 directory
+### 2. Go into the CML2 directory
 ```
 cd cml2/
 ```
 
-### 3.Edit env.py for your environment.
+### 3. Edit env.py for your environment.
 ```
 vi env.py
 ```
@@ -52,7 +52,7 @@ class MyEnv:
     subnet
         The subnet to which the docker host server belongs.
         This subnet is required to reach the internet.
-        Controllers, API servers, selenium hubs and seleniumi chromes need to
+        Controllers, API servers, selenium hubs and selenium chromes need to
         belong to this subnet.
     gateway
         Docker host subnet gateway.
@@ -66,10 +66,10 @@ class MyEnv:
         The selenium_hub is automatically deployed as a docker container.
     selenium_chrome01
         Address of selenium_chrome01.
-        The sselenium_chrome01 is automatically deployed as a docker container.
+        The selenium_chrome01 is automatically deployed as a docker container.
     selenium_chrome02
         Address of selenium_chrome02.
-        The sselenium_chrome02 is automatically deployed as a docker container.
+        The selenium_chrome02 is automatically deployed as a docker container.
     breakout_tool
         Address of breakout_tool0.
         The breakout_tool0 is automatically deployed as a docker container.
@@ -122,14 +122,32 @@ class MyEnv:
         }
 ```
 
-### 4.Run create_controller.py
+### 4.
+Store the yaml file that defines the lab configuration in the virl_data directory. You can download this yaml file from the lab defined in CML2.
+
+## Usage
+
+### 1. Creates html files for the controller
 ```
 sudo python3 create_controller.py
 ```
-This script creates an html file for the controller.
+This script creates html files for the controller.
 
-### 5.Run docker_start.py.
+### 2. Build and run containers
 ```
 sudo python3 docker_start.py
 ```
-Build and run breakout tool containers, python container, controller container, celenium-hub container, celemium-chrome containers.
+Build and run breakout tool containers, python container, controller container, selenium-hub container, selenium-chrome containers.
+
+### 3. Operate CML2
+1. Access the controller's ip address via http in your browser.
+2. Click the link of the CML2 you want to operate.
+3. Select the lab name you want to start and click run.
+4. Drink coffee and wait for all nodes to start.
+5. After all nodes have started, you can access telnet by clicking the link. It may be necessary to specify the telnet client on the browser side.
+
+## Uninstall
+```
+sudo python3 remove_all_container.py
+```
+Delete all docker containers and delete the built image as well.
