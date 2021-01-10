@@ -6,7 +6,7 @@ Cisco Modeling Labs is a tool for building virtual network simulations (or labs)
 
 With this demo you can deploy a docker containers to control multiple CML2s.
 - breakout_tool container :  This container provides a telnet connection to the node in CML2.This container will be deployed as many as your CML2 number.
-- python container : This container has the following two functions.
+- python(API server) container : This container has the following two functions.
   1. Import, start, stop, wipe and delete the lab of CML2.
   2. Configure the breakout tool with the selenium library so that you can telnet to the cml2 node.
 - controller container : This container provides UI that controls multiple CML2s. Please use it as a reference for creating a controller, which is your job.
@@ -57,7 +57,7 @@ class MyEnv:
     gateway
         Docker host subnet gateway.
     cml2_
-        Address of CML2 built in your environment
+        Address of CML2 built in your environment.
     api_server
         Address of api_server.
         The API server is automatically deployed as a docker container.
@@ -78,9 +78,9 @@ class MyEnv:
         The controller is automatically deployed as a docker container.
         This controller provides only minimal functionality.
          1.Stop the existing lab, wipe it, and delete it.
-         2.Start lab from the yaml file.
+         2.Import and start lab from the yaml file.
          3.Make it possible to operate the nodes in lab with telnet via
-           breakout_tool.
+           breakout_tool dontainer.
         It is your job to make a controller, so please refer to this form to
         make it.
     phsical_nic
