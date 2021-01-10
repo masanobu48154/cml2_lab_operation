@@ -122,7 +122,7 @@ class MyEnv:
         }
 ```
 
-### 4.
+### 4. Store yaml file
 Store the yaml file that defines the lab configuration in the virl_data directory. You can download this yaml file from the lab defined in CML2.
 
 ## Usage
