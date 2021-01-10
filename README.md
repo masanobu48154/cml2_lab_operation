@@ -2,7 +2,7 @@
 
 ## Overview
 
-Cisco Modeling Labs is a tool for building virtual network simulations (or labs) for you to test out new topologies, protocols, and config changes; automate network tests via CI/CD pipeline integration; and learn new things about the cool world of networking. This sandbox provides access to a Cisco Modeling Labs system that can be used to explore the capabilities of the newest release of Cisco Modeling Labs Personal and Enterprise.
+Cisco Modeling Labs is a tool for building virtual network simulations (or labs) for you to test out new topologies, protocols, and config changes; automate network tests via CI/CD pipeline integration; and learn new things about the cool world of networking.
 
 With this demo you can deploy a docker container to control multiple CML2s.
 - breakout_tool container :  This container provides a telnet connection to the node in CML2.
@@ -13,19 +13,19 @@ With this demo you can deploy a docker container to control multiple CML2s.
 - selenium-hub container : This container controls the selenium chrome container
 - selenium-chrome container : This container has a chrome browser.Operate the breakout tool web ui with a chrome browser.
 
-## Pre-requirements
+## The OS on which this software was tested
 - Ubuntu 20.04.1 LTS (Focal Fossa) with docker and python3 installed.
 
 ## Installation
 
 ### 1. Clone the repository
 ```
-git clone https://github.com/masanobu48154/cml2.git
+git clone https://github.com/masanobu48154/cml2_lab_operation.git
 ```
 
 ### 2. Go into the CML2 directory
 ```
-cd cml2/
+cd cml2_lab_operation/
 ```
 
 ### 3. Edit env.py for your environment.
