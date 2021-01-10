@@ -4,14 +4,14 @@
 
 Cisco Modeling Labs is a tool for building virtual network simulations (or labs) for you to test out new topologies, protocols, and config changes; automate network tests via CI/CD pipeline integration; and learn new things about the cool world of networking.
 
-With this demo you can deploy a docker container to control multiple CML2s.
-- breakout_tool container :  This container provides a telnet connection to the node in CML2.
-- python : This container has the following two functions.
-  1. Start, stop, wipe, delete the lab of CML2
-  2. Set the breakout tool so that you can connect to the nodes of cml2 with telnet.
-- controller container : This container provides you with a UI that controls multiple CML2s. Please use it as a reference for creating a controller, which is your job.
-- selenium-hub container : This container controls the selenium chrome container
-- selenium-chrome container : This container has a chrome browser.Operate the breakout tool web ui with a chrome browser.
+With this demo you can deploy a docker containers to control multiple CML2s.
+- breakout_tool container :  This container provides a telnet connection to the node in CML2.This container will be deployed as many as your CML2 number.
+- python container : This container has the following two functions.
+  1. Import, start, stop, wipe and delete the lab of CML2.
+  2. Configure the breakout tool with the selenium library so that you can telnet to the cml2 node.
+- controller container : This container provides UI that controls multiple CML2s. Please use it as a reference for creating a controller, which is your job.
+- selenium-hub container : This container controls the selenium chrome containers
+- selenium-chrome container : This container has a chrome browser operating the breakout tool web ui.
 
 ## The OS on which this software was tested
 - Ubuntu 20.04.1 LTS (Focal Fossa) with docker and python3 installed.
