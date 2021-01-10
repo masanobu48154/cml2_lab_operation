@@ -138,9 +138,9 @@ This script creates html files for the controller.
 ```
 sudo python3 docker_start.py
 ```
-Build and run breakout tool containers, python container, controller container, selenium-hub container, selenium-chrome containers.
+This script build and run breakout tool containers, python container, controller container, selenium-hub container and selenium-chrome containers.
 
-### 3. Operate CML2
+### 3. Operate CML2s
 1. Access the controller's ip address via http in your browser.
 2. Click the link of the CML2 you want to operate.
 3. Select the lab name you want to start and click run.
