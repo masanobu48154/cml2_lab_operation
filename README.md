@@ -71,8 +71,9 @@ class MyEnv:
         Address of selenium_chrome02.
         The selenium_chrome02 is automatically deployed as a docker container.
     breakout_tool
-        Address of breakout_tool0.
-        The breakout_tool0 is automatically deployed as a docker container.
+        Address of breakout_tools.
+        The breakout_tools is automatically deployed as a docker container.
+        Set the same number of addresses as your CML2.
     controller
         Address of controller.
         The controller is automatically deployed as a docker container.
@@ -109,8 +110,8 @@ class MyEnv:
             "breakout_tool0": "<breakout_tool_ip_address>",
             "breakout_tool1": "<breakout_tool_ip_address>",
             "breakout_tool2": "<breakout_tool_ip_address>",
-            "breakout_tool3": "<breakout_tool_ip_address>3",
-            "breakout_tool4": "<breakout_tool_ip_address>4",
+            "breakout_tool3": "<breakout_tool_ip_address>",
+            "breakout_tool4": "<breakout_tool_ip_address>",
             "breakout_tool5": "<breakout_tool_ip_address>",
             "breakout_tool6": "<breakout_tool_ip_address>",
             "breakout_tool7": "<breakout_tool_ip_address>",
