@@ -143,23 +143,23 @@ sudo python3 docker_start.py
 ```
 This script build and run breakout tool containers, python container, controller container, selenium-hub container and selenium-chrome containers.
 
-The details of the container runned by this script are as follows.
-
-1. breakout_tool container :  
-   - Pulled image == ubuntu:20.04
-   - Software installed when built == nothing
-2. python(API server) container :
-   - Pulled image == ubuntu:20.04
-   - Software installed when built == python3, python3-pip, apache2, vim, requests, selenium
-3. controller container :
-   - Pulled image == ubuntu:20.04
-   - Software installed when built == apache2, vim
-4. selenium-hub container :
-   - Pulled image == selenium/hub:3.14.0-helium
-   - Software installed when built == nothing
-5. selenium-chrome container :
-   - Pulled image == selenium/node-chrome-debug:3.14.0-helium
-   - Software installed when built == nothing
+> The details of the container runned by this script are as follows.
+>
+> 1. breakout_tool container :  
+>    - Pulled image == ubuntu:20.04
+>    - Software installed when built == nothing
+> 2. python(API server) container :
+>    - Pulled image == ubuntu:20.04
+>    - Software installed when built == python3, python3-pip, apache2, vim, requests, selenium
+> 3. controller container :
+>    - Pulled image == ubuntu:20.04
+>    - Software installed when built == apache2, vim
+> 4. selenium-hub container :
+>    - Pulled image == selenium/hub:3.14.0-helium
+>    - Software installed when built == nothing
+> 5. selenium-chrome container :
+>    - Pulled image == selenium/node-chrome-debug:3.14.0-helium
+>    - Software installed when built == nothing
 
 ### 3. Operate CML2s
 1. Access the controller's ip address via http in your browser.
