@@ -145,7 +145,7 @@ This script build and run breakout tool containers, python container, controller
 
 > The details of the container runned by this script are as follows.
 >
-> 1. breakout_tool container :  
+> 1. breakout_tool containers :  
 >    - Pulled image == ubuntu:20.04
 >    - Software installed when built == nothing
 > 2. python(API server) container :
