@@ -222,6 +222,21 @@ class Cml2:
             lab_nodes_dic[i] = RES_GET_NODES.json()
         return lab_nodes_dic
 
+    def check_converged(self):
+        """
+        Function to check if lab converged.
+        """
+        bearer = self.get_bearer()
+        for i in self.get_labid(bearer):
+            check_url = "https://{0}/api/v0/labs/{1}/check_if_converged".format(
+                self.host, i)
+            headers = {"Content-type": "application/json",
+                       "accept": "application/json",
+                       "Authorization": "Bearer {0}".format(bearer)}
+            s = requests.session()
+            RES_CHECK = s.get(getnodes_url, headers=headers, verify=False)
+            # return  RES_GET_NODES.json()
+        return RES_CHECK
 
 if __name__ == '__main__':
     method = input("Start(s) or Stop(p) or Get Nodes(g): ")
