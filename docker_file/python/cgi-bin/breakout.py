@@ -159,7 +159,8 @@ class BreakOut:
            user for CML2, change the settings on the configuration page.
         2. Refresh lab on the labs page and turn on the status toggle switch.
         """
-        if apple.check_converged(self.host) == "True":
+        object = apple.Cml2(self.host)
+        if object.check_converged() == "True":
             with self.get_webdriver() as driver:
                 driver.get('http://{0}:8080'.format(self.break_host))
                 self.click_selector(driver, configuration_tab)
