@@ -234,9 +234,8 @@ class Cml2:
                        "accept": "application/json",
                        "Authorization": "Bearer {0}".format(bearer)}
             s = requests.session()
-            RES_CHECK = s.get(getnodes_url, headers=headers, verify=False)
-            # return  RES_GET_NODES.json()
-        return RES_CHECK
+            RES_CHECK = s.get(check_url, headers=headers, verify=False)
+        return RES_CHECK.json()
 
 if __name__ == '__main__':
     method = input("Start(s) or Stop(p) or Get Nodes(g): ")
