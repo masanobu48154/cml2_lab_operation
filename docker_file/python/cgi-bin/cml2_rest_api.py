@@ -24,7 +24,7 @@ html_response = textwrap.dedent('''\
       <TITLE>Python Device Setting</TITLE>
      </HEAD>
      <BODY>
-      <H1>Success {0}</H1>
+      <H1>Status {0}</H1>
       <a href="#" onclick="javascript:window.history.back(-1);return false;">\
         Back to previous page and Wait a few minutes...</a>
       <br>
