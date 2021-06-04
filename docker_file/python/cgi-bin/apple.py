@@ -253,5 +253,9 @@ if __name__ == '__main__':
         host = input("Target CML Address : ")
         ob = Cml2(host)
         print(ob.get_node())
+    elif method == "c":
+        host = input("Target CML Address : ")
+        ob = Cml2(host)
+        print(ob.check_converged())
     else:
         print("Input 'S' or 'p' or 'g'!!")
