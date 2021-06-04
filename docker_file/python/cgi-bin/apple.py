@@ -238,7 +238,8 @@ class Cml2:
         return RES_CHECK.json()
 
 if __name__ == '__main__':
-    method = input("Start(s) or Stop(p) or Get Nodes(g): ")
+    method = input(
+        "Start(s) or Stop(p) or Get Nodes(g) or Check converged(c): ")
     if method == "s":
         host = input("Target CML Address : ")
         tech = input("Import Technology : ")
@@ -257,4 +258,4 @@ if __name__ == '__main__':
         ob = Cml2(host)
         print(ob.check_converged())
     else:
-        print("Input 'S' or 'p' or 'g'!!")
+        print("Input 'S' or 'p' or 'g' or 'c' !!")
