@@ -3,6 +3,7 @@
 import textwrap
 import time
 import env
+import apple
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -158,32 +159,35 @@ class BreakOut:
            user for CML2, change the settings on the configuration page.
         2. Refresh lab on the labs page and turn on the status toggle switch.
         """
-        with self.get_webdriver() as driver:
-            driver.get('http://{0}:8080'.format(self.break_host))
-            self.click_selector(driver, configuration_tab)
-            if self.get_attribute(
-                    driver, username_box) != self.login_data["username"]:
-                self.sendkey_selector(
-                    driver, 'https://{0}'.format(
-                        self.host), controller_address_box)
-                self.click_selector(
-                    driver, verify_tls_switch)
-                self.click_selector(
-                    driver, all_nodes_switch)
-                self.sendkey_selector(
-                    driver, '{0}'.format(
-                        self.login_data["username"]), username_box)
-                self.sendkey_selector(
-                    driver, '{0}'.format(
-                        self.login_data["password"]), password_box)
-                self.sendkey_selector(
-                    driver, self.break_host, listen_address_box)
-                self.click_selector(
-                    driver, save_button)
-            self.click_selector(driver, labs_tab)
-            self.click_selector(driver, refresh_button)
-            self.click_selector(driver, onoff_switch)
-        return "Success"
+        if apple.check_converged(self.host) == "True":
+            with self.get_webdriver() as driver:
+                driver.get('http://{0}:8080'.format(self.break_host))
+                self.click_selector(driver, configuration_tab)
+                if self.get_attribute(
+                        driver, username_box) != self.login_data["username"]:
+                    self.sendkey_selector(
+                        driver, 'https://{0}'.format(
+                            self.host), controller_address_box)
+                    self.click_selector(
+                        driver, verify_tls_switch)
+                    self.click_selector(
+                        driver, all_nodes_switch)
+                    self.sendkey_selector(
+                        driver, '{0}'.format(
+                            self.login_data["username"]), username_box)
+                    self.sendkey_selector(
+                        driver, '{0}'.format(
+                            self.login_data["password"]), password_box)
+                    self.sendkey_selector(
+                        driver, self.break_host, listen_address_box)
+                    self.click_selector(
+                        driver, save_button)
+                self.click_selector(driver, labs_tab)
+                self.click_selector(driver, refresh_button)
+                self.click_selector(driver, onoff_switch)
+            return "Success"
+        else:
+            return "Fail"
 
 
 if __name__ == '__main__':
